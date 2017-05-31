@@ -19,11 +19,11 @@
 <div class="divBody">
   <div class="divContent">
     <%--上一页 --%>
+<c:choose>
+	<c:when test="${pb.currentPage eq 1 }"><span class="spanBtnDisabled">上一页</span></c:when>
+	<c:otherwise><a href="${pb.url }&currentPage=${pb.currentPage-1}" class="aBtn bold">上一页</a></c:otherwise>
+</c:choose>
 
-        <span class="spanBtnDisabled">上一页</span>
-        <a href="" class="aBtn bold">上一页</a>
-
-    
     <%-- 计算begin和end --%>
       <%-- 如果总页数<=6，那么显示所有页码，即begin=1 end=${pb.tp} --%>
         <%-- 设置begin=当前页码-2，end=当前页码+3 --%>
@@ -45,14 +45,16 @@
 
     
      <%--下一页 --%>
-        <span class="spanBtnDisabled">下一页</span>
-        <a href="" class="aBtn bold">下一页</a> 
+<c:choose>
+	<c:when test="${pb.currentPage eq pb.getPageCount()}"><span class="spanBtnDisabled">下一页</span></c:when>
+	<c:otherwise><a href="${pb.url }&currentPage=${pb.currentPage+1}" class="aBtn bold">下一页</a></c:otherwise>
+</c:choose>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
     <%-- 共N页 到M页 --%>
-    <span>共12页</span>
+    <span>共${pb.getPageCount()}页</span>
     <span>到</span>
-    <input type="text" class="inputPageCode" id="pageCode" value="1"/>
+    <input type="text" class="inputPageCode" id="pageCode" value="${pb.currentPage}"/>
     <span>页</span>
     <a href="javascript:_go();" class="aSubmit">确定</a>
   </div>
