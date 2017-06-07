@@ -28,16 +28,16 @@
 <c:forEach items="${pb.beanList}" var="book">
   <li>
   <div class="inner">
-    <a class="pic" href="<c:url value='/jsps/book/desc.jsp'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
+    <a class="pic" href="<c:url value='/BookServlet?method=loadBook&bid=${book.bid}'/>"><img src="<c:url value='/${book.image_b }'/>" border="0"/></a>
     <p class="price">
 		<span class="price_n">&yen;${book.currPrice}</span>
 		<span class="price_r">&yen;${book.price}</span>
 		(<span class="price_s">${book.discount}折</span>)
 	</p>
-	<p><a id="bookname" title="${book.bname}" href="<c:url value='/jsps/book/desc.jsp'/>">${book.bname}</a></p>
-	<p><a href="<c:url value='/jsps/book/list.jsp'/>" name='P_zz' title='${book.author}'>${book.author}</a></p>
+	<p><a id="bookname" title="${book.bname}" href="<c:url value='/BookServlet?method=loadBook&bid=${book.bid}'/>">${book.bname}</a></p>
+	<p>${book.author}</p>
 	<p class="publishing">
-		<span>出 版 社：</span><a href="<c:url value='/jsps/book/list.jsp'/>">${book.press}</a>
+		<span>出 版 社：</span>${book.press}
 	</p>
 	<p class="publishing_time"><span>出版时间：</span>${book.publishtime}</p>
   </div>

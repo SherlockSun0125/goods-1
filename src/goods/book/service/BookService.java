@@ -26,5 +26,14 @@ public class BookService {
 		}
 	}
 	
+	//按id查询加载图书
+	public Book loadBook(String bid){
+		try {
+			return bookDao.findByBid(bid);
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+	}
+	
 
 }

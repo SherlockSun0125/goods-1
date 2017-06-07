@@ -3,16 +3,20 @@ package goods.book.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import goods.book.domain.Book;
+import goods.category.domain.Category;
 import goods.page.Expression;
 import goods.page.PageBean;
 import goods.page.PageConstants;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.jdbc.TxQueryRunner;
 
 public class BookDao {
@@ -79,6 +83,21 @@ public class BookDao {
 		List<Expression> exprList = new ArrayList<Expression>();
 		exprList.add(new Expression("bname", "like", "%" + bname + "%"));
 		return findByCriteria(exprList, currentPage);
+	}
+	
+	/**
+	 * 按bid查询
+	 * @param bid
+	 * @return
+	 * @throws SQLException
+	 */
+	public Book findByBid(String bid) throws SQLException {
+		String sql = "select * from t_book where bid=?";
+		Map<String,Object> map = qr.query(sql, new MapHandler(), bid);
+		Book book = CommonUtils.toBean(map, Book.class);
+		Category category = CommonUtils.toBean(map, Category.class);
+		book.setCategory(category);
+		return book;
 	}
 
 }

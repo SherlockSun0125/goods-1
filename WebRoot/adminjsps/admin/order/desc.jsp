@@ -36,7 +36,7 @@
 		<div class="divContent">
 			<dl>
 				<dt>收货人信息</dt>
-				<dd>北京市 昌平区 西三旗 金燕龙办公楼1层 传智播客 张三爷</dd>
+				<dd>北京市 昌平区 西三旗  张三爷</dd>
 			</dl>
 		</div>
 		<div class="divContent">

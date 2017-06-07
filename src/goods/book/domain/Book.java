@@ -14,7 +14,7 @@ public class Book {
 	private int edition;//版次
 	private int pageNum;//页数
 	private int wordNum;//字数
-	private String printtime;//刷新时间
+	private String printtime;//印刷时间
 	private int booksize;//开本
 	private String paper;//纸质
 	private Category category;//所属分类
