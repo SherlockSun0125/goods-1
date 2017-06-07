@@ -56,28 +56,31 @@ $(function() {
 				location="/goods/CartItemServlet?method=batchDelete&cartItemIds="+cartItemId;		
 			}
 		} else {
-			sendUpdate(cartItemId, quantity-1);
+			sendUpdateQuantity(cartItemId, quantity-1);
 		}
 	});
 	$(".jia").click(function() {
 		var cartItemId = $(this).attr("id").substring(0, 32);
 		var quantity = Number($("#" + cartItemId + "Quantity").val());
-		sendUpdate(cartItemId, quantity+1);
+		sendUpdateQuantity(cartItemId, quantity+1);
 	});
 });
 
 // 异步请求，修改数量
-function sendUpdate(cartItemId, quantity) {
-	/*
-	 1. 通过cartItemId找到输入框元素
-	 2. 通过cartItemId找到小计元素
-	*/
-	var input = $("#" + cartItemId + "Quantity");
-	var subtotal = $("#" + cartItemId + "Subtotal");
-	var currPrice = $("#" + cartItemId + "CurrPrice");
-	input.val(quantity);
-	subtotal.text(round(currPrice.text() * quantity, 2));
-	showTotal();
+function sendUpdateQuantity(cartItemId, quantity) {
+	$.ajax({
+		async:false,
+		cache:false,
+		url:"/goods/CartItemServlet",
+		data:{method:"updateQuantity",cartItemId:cartItemId,quantity:quantity},
+		type:"POST",
+		dataType:"json",
+		success:function(result){
+			$("#"+cartItemId+"Quantity").val(result.quantity);
+			$("#"+cartItemId+"Subtotal").text(result.subtotal);
+			showTotal();
+		}
+	});
 }
 
 // 设置所有条目复选框
@@ -128,8 +131,14 @@ function batchDelete(){
 }
 
 function jiesuan(){
-
-
+	var cartItemIdArray=new Array();
+	$(":checkbox[name=checkboxBtn][checked=true]").each(function(){
+		var cartItemId=$(this).val();
+		cartItemIdArray.push(cartItemId);
+	});
+	$("#cartItemIds").val(cartItemIdArray.toString());
+	$("#hiddenTotal").val($("#total").text());
+	$("#jieSuanForm").submit();//提交表单
 }
 
 

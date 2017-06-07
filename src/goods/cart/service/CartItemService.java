@@ -9,6 +9,23 @@ import goods.cart.domain.CartItem;
 public class CartItemService {
 	private CartItemDao cartItemDao=new CartItemDao();
 	
+	public List<CartItem> loadCartItems(String cartItemIds){
+		try {
+			return cartItemDao.loadCartItems(cartItemIds);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public CartItem updateQuantity(String cartItemId,int quantity){
+		try {
+			cartItemDao.updateQuantity(cartItemId, quantity);
+			return cartItemDao.findByCartItemId(cartItemId);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public void batchDelete(String cartItemIds){
 		try {
 			cartItemDao.batchDelete(cartItemIds);

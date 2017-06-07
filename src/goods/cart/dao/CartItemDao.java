@@ -18,6 +18,19 @@ import cn.itcast.jdbc.TxQueryRunner;
 
 public class CartItemDao {
 	private QueryRunner qr=new TxQueryRunner();
+	
+	/**
+	 * 加载购物车所有内容
+	 * @param cartItemIds
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<CartItem> loadCartItems(String cartItemIds) throws SQLException{
+		Object[] cartItemIdArray = cartItemIds.split(",");
+		String whereSql = toWhereSql(cartItemIdArray.length);
+		String sql = "select * from t_cartitem c, t_book b where c.bid=b.bid and " + whereSql;
+		return toCartItemList(qr.query(sql, new MapListHandler(), cartItemIdArray));
+	}
 	/**
 	 * 批量删除
 	 */
@@ -48,6 +61,12 @@ public class CartItemDao {
 		Map<String,Object> map = qr.query(sql, new MapHandler(), uid, bid);
 		CartItem cartItem = toCartItem(map);
 		return cartItem;
+	}
+	
+	public CartItem findByCartItemId(String cartItemId) throws SQLException{
+		String sql="select * from t_cartitem c,t_book b where c.bid=b.bid and c.cartItemId=?";
+		Map<String,Object> map=qr.query(sql, new MapHandler(),cartItemId);
+		return toCartItem(map);
 	}
 	
 	/**
