@@ -18,27 +18,27 @@ import goods.user.domain.User;
 public class CartItemServlet extends BaseServlet{
 	private CartItemService cartItemService=new CartItemService();
 	
-//	public String loadCartItems(HttpServletRequest req, HttpServletResponse resp)
-//			throws ServletException, IOException {
-//		String cartItemIds = req.getParameter("cartItemIds");
-//		double total = Double.parseDouble(req.getParameter("total"));
-//		List<CartItem> cartItemList=cartItemService.loadCartItems(cartItemIds);
-//		
-//		req.setAttribute("cartItemList", cartItemList);
-//		req.setAttribute("total", total);
-//		req.setAttribute("cartItemIds", cartItemIds);
-//		return "f:/jsps/cart/showitem.jsp";
-//	}
 	public String loadCartItems(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		User user = (User)req.getSession().getAttribute("sessionUser");
-		String uid = user.getUid();
+		String cartItemIds = req.getParameter("cartItemIds");
 		double total = Double.parseDouble(req.getParameter("total"));
-		List<CartItem> cartItemList = cartItemService.myCart(uid);
+		List<CartItem> cartItemList=cartItemService.loadCartItems(cartItemIds);
+		
 		req.setAttribute("cartItemList", cartItemList);
 		req.setAttribute("total", total);
+		req.setAttribute("cartItemIds", cartItemIds);
 		return "f:/jsps/cart/showitem.jsp";
 	}
+//	public String loadCartItems(HttpServletRequest req, HttpServletResponse resp)
+//			throws ServletException, IOException {
+//		User user = (User)req.getSession().getAttribute("sessionUser");
+//		String uid = user.getUid();
+//		double total = Double.parseDouble(req.getParameter("total"));
+//		List<CartItem> cartItemList = cartItemService.myCart(uid);
+//		req.setAttribute("cartItemList", cartItemList);
+//		req.setAttribute("total", total);
+//		return "f:/jsps/cart/showitem.jsp";
+//	}
 	public String updateQuantity(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String cartItemId=req.getParameter("cartItemId");

@@ -23,10 +23,6 @@ public class BookDao {
 	private QueryRunner qr=new TxQueryRunner();
 	/**
 	 * 通用查询方法
-	 * @param exprList
-	 * @param currentPage
-	 * @return
-	 * @throws SQLException
 	 */
 	private PageBean<Book> findByCriteria(List<Expression> exprList, int currentPage) throws SQLException{
 		int pageSize = PageConstants.BOOK_PAGE_SIZE;//每页记录数
