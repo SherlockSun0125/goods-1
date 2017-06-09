@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import tools.commons.CommonUtils;
+import tools.servlet.BaseServlet;
+
 import goods.user.domain.User;
 import goods.user.service.UserService;
 import goods.user.service.exception.UserException;
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.servlet.BaseServlet;
 
 /**
  * 用户模块控制层

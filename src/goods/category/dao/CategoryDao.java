@@ -10,8 +10,9 @@ import java.util.Map;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.jdbc.TxQueryRunner;
+import tools.commons.CommonUtils;
+import tools.jdbc.TxQueryRunner;
+
 
 public class CategoryDao {
 	QueryRunner qr=new TxQueryRunner();

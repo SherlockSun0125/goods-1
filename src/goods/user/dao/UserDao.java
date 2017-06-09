@@ -7,7 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import cn.itcast.jdbc.TxQueryRunner;
+import tools.jdbc.TxQueryRunner;
 
 /**
  * 用户数据持久层

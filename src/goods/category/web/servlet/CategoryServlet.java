@@ -7,10 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tools.servlet.BaseServlet;
+
 import goods.category.domain.Category;
 import goods.category.service.CategoryService;
-import cn.itcast.servlet.BaseServlet;
 
+@SuppressWarnings("serial")
 public class CategoryServlet extends BaseServlet{
 	CategoryService categoryService=new CategoryService();
 	

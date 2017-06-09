@@ -10,6 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tools.commons.CommonUtils;
+import tools.servlet.BaseServlet;
+
 import goods.cart.domain.CartItem;
 import goods.cart.service.CartItemService;
 import goods.order.domain.Order;
@@ -17,8 +20,6 @@ import goods.order.domain.OrderItem;
 import goods.order.service.OrderService;
 import goods.page.PageBean;
 import goods.user.domain.User;
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.servlet.BaseServlet;
 
 public class OrderServlet extends BaseServlet {
 	private OrderService orderService=new OrderService();

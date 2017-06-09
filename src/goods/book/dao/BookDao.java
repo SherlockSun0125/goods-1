@@ -16,8 +16,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.jdbc.TxQueryRunner;
+import tools.commons.CommonUtils;
+import tools.jdbc.TxQueryRunner;
 
 public class BookDao {
 	private QueryRunner qr=new TxQueryRunner();

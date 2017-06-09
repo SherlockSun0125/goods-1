@@ -11,9 +11,7 @@ import javax.mail.Session;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.mail.Mail;
-import cn.itcast.mail.MailUtils;
+import tools.commons.CommonUtils;
 import goods.user.service.exception.UserException;
 
 import goods.user.dao.UserDao;

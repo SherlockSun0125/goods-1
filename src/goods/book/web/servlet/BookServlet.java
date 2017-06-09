@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.dbutils.QueryRunner;
 
+import tools.servlet.BaseServlet;
+
 import goods.book.domain.Book;
 import goods.book.service.BookService;
 import goods.page.PageBean;
-import cn.itcast.jdbc.TxQueryRunner;
-import cn.itcast.servlet.BaseServlet;
 
 public class BookServlet extends BaseServlet {
 	private BookService bookService = new BookService();

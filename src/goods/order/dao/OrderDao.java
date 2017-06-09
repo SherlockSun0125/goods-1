@@ -20,8 +20,8 @@ import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import cn.itcast.commons.CommonUtils;
-import cn.itcast.jdbc.TxQueryRunner;
+import tools.commons.CommonUtils;
+import tools.jdbc.TxQueryRunner;
 
 public class OrderDao {
 	QueryRunner qr=new TxQueryRunner();

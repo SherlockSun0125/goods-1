@@ -2,7 +2,7 @@ package goods.order.service;
 
 import java.sql.SQLException;
 
-import cn.itcast.jdbc.JdbcUtils;
+import tools.jdbc.JdbcUtils;
 
 import goods.order.dao.OrderDao;
 import goods.order.domain.Order;

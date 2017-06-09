@@ -33,7 +33,7 @@
 	<table align="center" border="0" width="100%" cellpadding="0" cellspacing="0">
 	<c:forEach items="${pb.beanList}" var="order">
 		<tr class="tt">
-			<td width="320px">订单号：<a  href="<c:url value='/OrderSrvlet?method=loadOrder&oid=${order.oid}'/>">${order.oid}</a></td>
+			<td width="320px">订单号：<a  href="<c:url value='/OrderServlet?method=loadOrder&oid=${order.oid}'/>">${order.oid}</a></td>
 			<td width="200px">下单时间：${order.orderTime}</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
