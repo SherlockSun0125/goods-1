@@ -54,5 +54,30 @@ public class OrderService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/**
+	 * 查询订单状态
+	 * @param oid
+	 */
+	public int findOrderStatus(String oid){
+		try {
+			return orderDao.findOrderStatus(oid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * 更新订单状态
+	 * @param oid
+	 * @param status
+	 */
+	public void updateStatus(String oid,int status){
+		try {
+			orderDao.updateOrderStatus(oid, status);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
 
 }

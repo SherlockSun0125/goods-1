@@ -22,7 +22,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import tools.commons.CommonUtils;
 import tools.jdbc.TxQueryRunner;
-
 public class OrderDao {
 	QueryRunner qr=new TxQueryRunner();
 	
@@ -46,7 +45,7 @@ public class OrderDao {
 		String sql = "select count(*) from t_order" + whereSql;
 		Number number = (Number)qr.query(sql, new ScalarHandler(), params.toArray());
 		int totalRecords = number.intValue();//得到了总记录数
-		sql = "select * from t_order" + whereSql + " order by ordertime limit ?,?";
+		sql = "select * from t_order" + whereSql + " order by ordertime desc limit ?,?";
 		params.add((currentPage-1) * pageSize);//当前页首行记录的下标
 		params.add(pageSize);//一共查询几行，就是每页记录数
 		
@@ -127,7 +126,7 @@ public class OrderDao {
 		for(int i=0;i<len;i++){
 			OrderItem orderItem=order.getOrderItemList().get(i);
 			obj[i]=new Object[]{orderItem.getOrderItemId(),orderItem.getQuantity(),
-					orderItem.getSubTotal(),orderItem.getBook().getBid(),
+					orderItem.getSubtotal(),orderItem.getBook().getBid(),
 					orderItem.getBook().getBname(),orderItem.getBook().getCurrPrice(),
 					orderItem.getBook().getImage_b(),order.getOid()};
 		}
@@ -143,6 +142,21 @@ public class OrderDao {
 		Order order=qr.query(sql, new BeanHandler<Order>(Order.class),oid);
 		loadOrderItem(order);//加载所有订单条目
 		return order;
+	}
+	
+	/**
+	 * 查询订单状态
+	 * @throws SQLException 
+	 */
+	public int findOrderStatus(String oid) throws SQLException{
+		String sql="select status from t_order where oid=?";
+		Number num=(Number)qr.query(sql,new ScalarHandler(),oid);
+		return num.intValue();
+	}
+	
+	public void updateOrderStatus(String oid,int status) throws SQLException{
+		String sql="update t_order set status=? where oid=?";
+		qr.update(sql, status,oid);
 	}
 	
 }

@@ -32,7 +32,6 @@
 		<dt>收货地址</dt>
 		<dd>${order.address}</dd>
 	</dl>
-	<span>工大书城感谢您的支持，祝您购物愉快！</span>
 	<a href="<c:url value='/OrderServlet?method=paymentPre&oid=${order.oid}'/>" id="linkPay">支付</a>
 </div>
   </body>

@@ -34,9 +34,9 @@ public class UserDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean ajaxValidateEmail(String email) throws SQLException{
-		String sql = "select count(1) from t_user where email=?";
-		Number number = (Number)qr.query(sql, new ScalarHandler(), email);
+	public boolean ajaxValidatePhone(String phone) throws SQLException{
+		String sql = "select count(1) from t_user where phone=?";
+		Number number = (Number)qr.query(sql, new ScalarHandler(), phone);
 		return number.intValue() == 0;
 	}
 	
@@ -46,9 +46,9 @@ public class UserDao {
 	 * @throws SQLException 
 	 */
 	public void add(User user) throws SQLException {
-		String sql = "insert into t_user values(?,?,?,?,?,?)";
+		String sql = "insert into t_user values(?,?,?,?)";
 		Object[] params = {user.getUid(), user.getLoginname(), user.getLoginpass(),
-				user.getEmail(), user.getStatus(), user.getActivationCode()};
+				user.getPhone()};
 		qr.update(sql, params);
 	}
 	

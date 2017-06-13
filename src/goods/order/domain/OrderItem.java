@@ -5,7 +5,7 @@ import goods.book.domain.Book;
 public class OrderItem {
 	private String orderItemId;
 	private int quantity;
-	private double subTotal;
+	private double subtotal;
 	private Book book;
 	private Order order;//所属的订单
 	public String getOrderItemId() {
@@ -20,11 +20,12 @@ public class OrderItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public double getSubTotal() {
-		return subTotal;
+
+	public double getSubtotal() {
+		return subtotal;
 	}
-	public void setSubTotal(double subTotal) {
-		this.subTotal = subTotal;
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
 	}
 	public Book getBook() {
 		return book;

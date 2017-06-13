@@ -34,9 +34,9 @@ public class UserService {
 	}
 
 	//email校验
-	public boolean ajaxValidateEmail(String email){
+	public boolean ajaxValidatePhone(String phone){
 		try {
-			return userDao.ajaxValidateEmail(email);
+			return userDao.ajaxValidatePhone(phone);
 		} catch (SQLException e) {
 			throw new RuntimeException();
 		}
@@ -51,8 +51,6 @@ public class UserService {
 		 * 1. 数据的补齐
 		 */
 		user.setUid(CommonUtils.uuid());
-		user.setStatus(0);
-		user.setActivationCode(CommonUtils.uuid() + CommonUtils.uuid());
 		/*
 		 * 2. 向数据库插入
 		 */

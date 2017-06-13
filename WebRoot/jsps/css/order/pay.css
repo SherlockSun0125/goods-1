@@ -5,10 +5,10 @@ body {
 
 .divContent {
 	width: 880px;
-	height: 100px;
+	height: 50px;
 	background-color: #efeae5;
 	margin-left: 50px;
-	line-height: 100px;
+	line-height: 50px;
 	color: #404040;
 	border: 5px solid #efeae5;
 }

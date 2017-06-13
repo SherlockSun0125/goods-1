@@ -54,10 +54,10 @@
 							id="reloginpassError"></label></td>
 					</tr>
 					<tr>
-						<td class="tdLabel">Email：</td>
-						<td class="tdInput"><input type="text" name="email"
-							id="email" class="input" value="" /></td>
-						<td class="tdError"><label class="labelError" id="emailError"></label>
+						<td class="tdLabel">手机号码：</td>
+						<td class="tdInput"><input type="text" name="phone"
+							id="phone" class="input" value="" /></td>
+						<td class="tdError"><label class="labelError" id="phoneError"></label>
 						</td>
 					</tr>
 					<tr>

@@ -29,7 +29,8 @@ public class OrderServlet extends BaseServlet {
 	 */
 	private int getPc(HttpServletRequest req) {
 		int pc = 1;
-		String param = req.getParameter("pc");
+		String param = req.getParameter("currentPage");
+		System.out.println("param="+param);
 		if(param != null && !param.trim().isEmpty()) {
 			try {
 				pc = Integer.parseInt(param);
@@ -44,6 +45,7 @@ public class OrderServlet extends BaseServlet {
 	 */
 	private String getUrl(HttpServletRequest req) {
 		String url = req.getRequestURI() + "?" + req.getQueryString();
+		System.out.println("url="+url);
 		//如果url中存在pc参数，截取掉
 		int index = url.lastIndexOf("&currentPage=");
 		if(index != -1) {
@@ -90,7 +92,7 @@ public class OrderServlet extends BaseServlet {
 			OrderItem orderItem = new OrderItem();
 			orderItem.setOrderItemId(CommonUtils.uuid());//设置主键
 			orderItem.setQuantity(cartItem.getQuantity());
-			orderItem.setSubTotal(cartItem.getSubTotal());
+			orderItem.setSubtotal(cartItem.getSubTotal());
 			orderItem.setBook(cartItem.getBook());
 			orderItem.setOrder(order);
 			orderItemList.add(orderItem);
@@ -113,15 +115,66 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("order", order);
 		String btn=req.getParameter("btn");//btn值代表超链接访问类别
 		req.setAttribute("btn", btn);
+//		List<OrderItem> list=order.getOrderItemList();
+//		for(OrderItem orderItem:list){
+//			System.out.println(orderItem.getBook().getBname().substring(0,10)+":"+orderItem.getSubtotal());
+//		}
 		return "f:/jsps/order/desc.jsp";
 	}
 	
+	/**
+	 * 取消订单
+	 */
+	public String cancelOrder(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String oid=req.getParameter("oid");
+		int status=orderService.findOrderStatus(oid);
+		if(status!=1){
+			req.setAttribute("code", "error");
+			req.setAttribute("msg", "订单状态错误，不能取消！");
+			return "f:/jsps/order/msg.jsp";
+		}
+		orderService.updateStatus(oid, 5);//设置状态为取消！
+		req.setAttribute("code", "success");
+		req.setAttribute("msg", "您的订单已取消，您不后悔吗！");
+		return "f:/jsps/order/msg.jsp";		
+	}
 	
+	/**
+	 * 确认收货
+	 */
+	protected String confirmOrder(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String oid=req.getParameter("oid");
+		int status=orderService.findOrderStatus(oid);
+		if(status!=3){
+			req.setAttribute("code", "error");
+			req.setAttribute("msg", "订单状态错误，不能确认收货！");
+			return "f:/jsps/order/msg.jsp";
+		}
+		orderService.updateStatus(oid, 4);//设置状态为交易成功
+		req.setAttribute("code", "success");
+		req.setAttribute("msg", "恭喜您,交易成功");
+		return "f:/jsps/order/msg.jsp";	
+		
+	}
 	
 	public String paymentPre(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
-		return "f:/jsps/order/list.jsp";
+		req.setAttribute("order", orderService.loadOrder(req.getParameter("oid")));
+		return "f:/jsps/order/pay.jsp";
+	}
+	
+	/**
+	 * 订单支付完成
+	 */
+	public String payment(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String oid=req.getParameter("oid");
+		orderService.updateStatus(oid, 2);//设置状态为等待确认！
+		req.setAttribute("code", "success");
+		req.setAttribute("msg", "支付成功");
+		return "f:/jsps/order/msg.jsp";	
 	}
 	
 	

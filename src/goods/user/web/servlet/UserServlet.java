@@ -39,14 +39,14 @@ public class UserServlet extends BaseServlet {
 		return null;
 	}
 
-	// email校验
-	public String ajaxValidateEmail(HttpServletRequest req,
+	// phone校验
+	public String ajaxValidatePhone(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
-		// 1.获取email
-		String email = req.getParameter("email");
+		// 1.获取phone
+		String email = req.getParameter("phone");
 
 		// 2.service校验
-		boolean b = userService.ajaxValidateEmail(email);
+		boolean b = userService.ajaxValidatePhone(email);
 
 		// 3.响应请求,发给客户端
 		resp.getWriter().print(b);
@@ -66,11 +66,14 @@ public class UserServlet extends BaseServlet {
 	// 注册
 	public String regist(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		System.out.println("----------开始注册-----------");
 		// 1. 封装表单数据到User对象
 		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
+		System.out.println(formUser.toString());
 
 		// 2.完整表单校验
 		Map<String, String> errors = validateRegist(formUser, req.getSession());
+		System.out.println("error:"+errors);
 		if (errors.size() > 0) {
 			req.setAttribute("form", formUser);
 			req.setAttribute("errors", errors);
@@ -78,7 +81,7 @@ public class UserServlet extends BaseServlet {
 		}
 		// 3. 使用service完成业务
 		userService.regist(formUser);
-		System.out.println("开始跳转");
+		
 
 		// 4. 保存成功信息，转发到msg.jsp显示！
 		req.setAttribute("code", "success");
@@ -125,16 +128,16 @@ public class UserServlet extends BaseServlet {
 		}
 
 		/*
-		 * 4. 校验email
+		 * 4. 校验phone
 		 */
-		String email = formUser.getEmail();
-		if (email == null || email.trim().isEmpty()) {
+		String phone = formUser.getPhone();
+		if (phone == null || phone.trim().isEmpty()) {
 			errors.put("email", "Email不能为空！");
-		} else if (!email
-				.matches("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\\.[a-zA-Z0-9_-]{2,3}){1,2})$")) {
-			errors.put("email", "Email格式错误！");
-		} else if (!userService.ajaxValidateEmail(email)) {
-			errors.put("email", "Email已被注册！");
+		} else if (!phone
+				.matches("^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$")) {
+			errors.put("phone", "手机号码格式错误！");
+		} else if (!userService.ajaxValidatePhone(phone)) {
+			errors.put("phone", "该手机号已被注册！");
 		}
 
 		/*
@@ -168,8 +171,10 @@ public class UserServlet extends BaseServlet {
 			req.setAttribute("user", formUser);
 			return "f:/jsps/user/login.jsp";
 		} else {
+			
+			HttpSession session=req.getSession();
 			// 保存用户到session
-			req.getSession().setAttribute("sessionUser", user);
+			session.setAttribute("sessionUser", user);
 			// 获取用户名保存到cookie中
 			String loginname = user.getLoginname();
 			loginname = URLEncoder.encode(loginname, "utf-8");
@@ -221,7 +226,7 @@ public class UserServlet extends BaseServlet {
 	
 	public String quit(HttpServletRequest req, HttpServletResponse resp){
 		req.getSession().invalidate();//注销用户信息
-		return "r:/jsps/user/login.jsp";
+		return "f:/jsps/main.jsp";
 	}
 
 }

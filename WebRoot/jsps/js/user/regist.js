@@ -48,7 +48,7 @@ $(function(){
 		if(!validateReloginpass()) {
 			bool = false;
 		}
-		if(!validateEmail()) {
+		if(!validatePhone()) {
 			bool = false;
 		}
 		if(!validateVerifyCode()) {
@@ -196,10 +196,10 @@ function validateReloginpass() {
 }
 
 /*
- * Email校验方法
+ * Phone校验方法
  */
-function validateEmail() {
-	var id = "email";
+function validatePhone() {
+	var id = "phone";
 	var value = $("#" + id).val();//获取输入框内容
 	/*
 	 * 1. 非空校验
@@ -215,15 +215,15 @@ function validateEmail() {
 		return false;
 	}
 	/*
-	 * 2. Email格式校验
+	 * 2. 手机号码格式校验
 	 */
-	if(!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(value)) {
+	if(!/^1\d{10}$/.test(value)) {
 		/*
 		 * 获取对应的label
 		 * 添加错误信息
 		 * 显示label
 		 */
-		$("#" + id + "Error").text("错误的Email格式！");
+		$("#" + id + "Error").text("错误的手机号码格式！");
 		showError($("#" + id + "Error"));
 		false;
 	}
@@ -232,14 +232,14 @@ function validateEmail() {
 	 */
 	$.ajax({
 		url:"/goods/UserServlet",//要请求的servlet
-		data:{method:"ajaxValidateEmail", email:value},//给服务器的参数
+		data:{method:"ajaxValidatePhone", phone:value},//给服务器的参数
 		type:"POST",
 		dataType:"json",
 		async:false,//是否异步请求，如果是异步，那么不会等服务器返回，我们这个函数就向下运行了。
 		cache:false,
 		success:function(result) {
 			if(!result) {//如果校验失败
-				$("#" + id + "Error").text("Email已被注册！");
+				$("#" + id + "Error").text("该手机号已被注册！");
 				showError($("#" + id + "Error"));
 				return false;
 			}

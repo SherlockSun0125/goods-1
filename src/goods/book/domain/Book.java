@@ -122,5 +122,11 @@ public class Book {
 	public void setImage_b(String image_b) {
 		this.image_b = image_b;
 	}
+	@Override
+	public String toString() {
+		return "Book [bid=" + bid + ", bname=" + bname + ", author=" + author
+				+ ", currPrice=" + currPrice + "]";
+	}
+	
 
 }

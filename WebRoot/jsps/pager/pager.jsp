@@ -48,13 +48,13 @@
 			</c:otherwise>
 		</c:choose>
 
-		<c:forEach begin="${begin }" end="${end }" var="i">
+		<c:forEach begin="${begin}" end="${end}" var="i">
 			<c:choose>
-				<c:when test="${i eq pb.currentPage }">
-					<span class="spanBtnSelect">${i }</span>
+				<c:when test="${i eq pb.currentPage}">
+					<span class="spanBtnSelect">${i}</span>
 				</c:when>
 				<c:otherwise>
-					<a href="${pb.url }&currentPage=${i}" class="aBtn">${i }</a>
+					<a href="${pb.url }&currentPage=${i}" class="aBtn">${i}</a>
 				</c:otherwise>
 			</c:choose>
 
@@ -71,7 +71,7 @@
 				<span class="spanBtnDisabled">下一页</span>
 			</c:when>
 			<c:otherwise>
-				<a href="${pb.url }&currentPage=${pb.currentPage+1}"
+				<a href="${pb.url}&currentPage=${pb.currentPage+1}"
 					class="aBtn bold">下一页</a>
 			</c:otherwise>
 		</c:choose>
