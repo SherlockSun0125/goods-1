@@ -143,7 +143,7 @@ public class OrderServlet extends BaseServlet {
 	/**
 	 * 确认收货
 	 */
-	protected String confirmOrder(HttpServletRequest req, HttpServletResponse resp)
+	public  String confirmOrder(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String oid=req.getParameter("oid");
 		int status=orderService.findOrderStatus(oid);
@@ -177,6 +177,36 @@ public class OrderServlet extends BaseServlet {
 		return "f:/jsps/order/msg.jsp";	
 	}
 	
-	
+	/**
+	 * 我的订单
+	 */
+	public String findByStatus(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		int currentPage = getPc(req);
+		String url = getUrl(req);
+		User user = (User)req.getSession().getAttribute("sessionUser");
+		PageBean<Order> pb = orderService.myOrders(user.getUid(), currentPage);
+		pb.setUrl(url);
+		int status = Integer.parseInt(req.getParameter("status"));
+		List<Order> orderList=pb.getBeanList();
+		List<Order> myOrderList=new ArrayList<Order>();
+		if(status==123){
+			for(Order order:orderList){
+				if(order.getStatus()==1||order.getStatus()==2||order.getStatus()==3){
+					myOrderList.add(order);
+				}
+			}
+		}else{
+			for(Order order:orderList){
+				if(order.getStatus()==status){
+					myOrderList.add(order);
+				}
+			}
+		}
+		pb.setBeanList(myOrderList);
+		req.setAttribute("pb", pb);
+		return "f:/jsps/order/list.jsp";
+	}
+
 
 }

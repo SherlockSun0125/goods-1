@@ -79,7 +79,7 @@ a:hover {color:#FF6600; text-decoration: underline;}
 		<br/>
 		<br/>
 		<br/>
-		<span style="margin-left: 50px;"><a target="body" href="<c:url value='/OrderServlet?method=myOrders'/>">返回</a></span>
+		<span style="margin-left: 50px;"><a target="body" href="<c:url value='/OrderServlet?method=findByStatus&status=123'/>">返回</a></span>
 		<span style="margin-left: 50px;"><a target="_top" href="<c:url value='/index.jsp'/>">主页</a></span>
 	  </div>
 	</div>

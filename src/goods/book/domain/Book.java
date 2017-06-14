@@ -125,8 +125,15 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bid=" + bid + ", bname=" + bname + ", author=" + author
-				+ ", currPrice=" + currPrice + "]";
+				+ ", price=" + price + ", currPrice=" + currPrice
+				+ ", discount=" + discount + ", press=" + press
+				+ ", publishtime=" + publishtime + ", edition=" + edition
+				+ ", pageNum=" + pageNum + ", wordNum=" + wordNum
+				+ ", printtime=" + printtime + ", booksize=" + booksize
+				+ ", paper=" + paper + ", category=" + category + ", image_w="
+				+ image_w + ", image_b=" + image_b + "]";
 	}
+
 	
 
 }

@@ -84,7 +84,7 @@
 				<a id="cancel" href="<c:url value='/OrderServlet?method=cancelOrder&oid=${order.oid}'/>">取消订单</a><br/>
 			</c:if>
 			<c:if test="${order.status eq 3 and btn eq 'confirm'}">
-				<a id="confirm" href="<c:url value='/OrderServlet?method=comfirmOrder&oid=${order.oid}'/>">确认收货</a><br/>	
+				<a id="confirm" href="<c:url value='/OrderServlet?method=confirmOrder&oid=${order.oid}'/>">确认收货</a><br/>	
 			</c:if>
 		</div>
 	</div>

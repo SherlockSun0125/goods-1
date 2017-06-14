@@ -26,8 +26,14 @@ public class CartItemServlet extends BaseServlet{
 			throws ServletException, IOException {
 		String cartItemIds = req.getParameter("cartItemIds");
 		double total = Double.parseDouble(req.getParameter("total"));
+		HttpSession session=req.getSession();
+		Object user=session.getAttribute("sessionUser");
+		if(user==null){
+			req.setAttribute("code", "error");//为了显示X图片
+			req.setAttribute("msg", "您还没有登录，不能访问本资源");
+			return "f:/jsps/msg.jsp";
+		}
 		List<CartItem> cartItemList=cartItemService.loadCartItems(cartItemIds);
-		
 		req.setAttribute("cartItemList", cartItemList);
 		req.setAttribute("total", total);
 		req.setAttribute("cartItemIds", cartItemIds);

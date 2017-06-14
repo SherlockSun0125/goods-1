@@ -159,4 +159,25 @@ public class OrderDao {
 		qr.update(sql, status,oid);
 	}
 	
+	/**
+	 * 查询所有
+	 */
+	public PageBean<Order> findAll(int pc) throws SQLException {
+		List<Expression> exprList = new ArrayList<Expression>();
+		return findByCriteria(exprList, pc);
+	}
+	
+	/**
+	 * 按状态查询
+	 * @param status
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Order> findByStatus(int status, int pc) throws SQLException {
+		List<Expression> exprList = new ArrayList<Expression>();
+		exprList.add(new Expression("status", "=", status + ""));
+		return findByCriteria(exprList, pc);
+	}
+	
 }

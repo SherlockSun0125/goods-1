@@ -17,7 +17,7 @@
 
   </head>
 <style type="text/css">
-	body {background: rgb(254,238,189);}
+	body {background: rgb(254,238,250);}
 </style>
   <body>
 <h2>${msg }</h2>
