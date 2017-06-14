@@ -121,14 +121,12 @@ public class CartItemServlet extends BaseServlet{
 		Object user = session.getAttribute("sessionUser");
 		List<CartItem> cartItemList=(List<CartItem>) session.getAttribute("cartItemList");
 		if(user==null){//用户未登录
-			System.out.println("未登录");
 			if(cartItemList==null){
 				cartItemList=new ArrayList<CartItem>();
 			}
 			book=bookService.loadBook(book.getBid());
 			cartItem.setBook(book);
 			cartItem.setCartItemId(CommonUtils.uuid());
-			System.out.println("CartItem="+cartItem.toString());
 			cartItemList.add(cartItem);
 			session.setAttribute("cartItemList", cartItemList);//将未登录购物数据加入session
 		}else{//用户已登录则直接将购物车加入数据库

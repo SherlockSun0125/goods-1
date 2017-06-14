@@ -30,7 +30,6 @@ public class OrderServlet extends BaseServlet {
 	private int getPc(HttpServletRequest req) {
 		int pc = 1;
 		String param = req.getParameter("currentPage");
-		System.out.println("param="+param);
 		if(param != null && !param.trim().isEmpty()) {
 			try {
 				pc = Integer.parseInt(param);
@@ -45,7 +44,6 @@ public class OrderServlet extends BaseServlet {
 	 */
 	private String getUrl(HttpServletRequest req) {
 		String url = req.getRequestURI() + "?" + req.getQueryString();
-		System.out.println("url="+url);
 		//如果url中存在pc参数，截取掉
 		int index = url.lastIndexOf("&currentPage=");
 		if(index != -1) {
