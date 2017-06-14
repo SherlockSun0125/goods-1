@@ -29,7 +29,7 @@
     		<th>描述</th>
     		<th>操作</th>
     	</tr>
-    	
+    	<!-- 这个界面需要更改 -->
 	<c:forEach items="${parents}" var="parent">
 	    	<tr class="trOneLevel">
 	    		<td width="200px;">${parent.cname }</td>
