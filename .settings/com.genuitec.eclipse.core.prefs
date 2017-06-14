@@ -1,0 +1,4 @@
+#Wed Jun 14 08:49:10 CST 2017
+eclipse.preferences.version=1
+validator.Checked=WebRoot/jsps/jsps/pager/pager.jsp,WebRoot/jsps/pager/pager.jsp,WebRoot/adminjsps/login.jsp,WebRoot/adminjsps/admin/category
+validator.Unchecked=
